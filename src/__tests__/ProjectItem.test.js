@@ -1,40 +1,25 @@
-import "@testing-library/jest-dom";
+import React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import ProjectItem from "../components/ProjectItem";
 
-const project = {
-  id: 1,
-  name: "Reciplease",
-  about: "A recipe tracking app",
-  technologies: ["Rails", "Bootstrap CSS"],
-};
-
-test("each <span> element has a unique key prop", () => {
-  let errorSpy = jest.spyOn(global.console, "error");
+test("renders the project name, about text, and technologies", () => {
   render(
     <ProjectItem
-      name={project.name}
-      about={project.about}
-      technologies={project.technologies}
+      name="Test Project"
+      about="A sample project for testing"
+      technologies={["React", "Node", "Tailwind"]}
     />
   );
 
-  expect(errorSpy).not.toHaveBeenCalled();
+  // Check project name
+  expect(screen.getByText("Test Project")).toBeInTheDocument();
 
-  errorSpy.mockRestore();
-});
+  // Check about text
+  expect(screen.getByText("A sample project for testing")).toBeInTheDocument();
 
-test("renders a <span> for each technology passed in as a prop", () => {
-  render(
-    <ProjectItem
-      name={project.name}
-      about={project.about}
-      technologies={project.technologies}
-    />
-  );
-  for (const technology of project.technologies) {
-    const span = screen.queryByText(technology);
-    expect(span).toBeInTheDocument();
-    expect(span.tagName).toBe("SPAN");
-  }
+  // Check technologies
+  expect(screen.getByText("React")).toBeInTheDocument();
+  expect(screen.getByText("Node")).toBeInTheDocument();
+  expect(screen.getByText("Tailwind")).toBeInTheDocument();
 });

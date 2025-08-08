@@ -1,17 +1,32 @@
 import React from "react";
-import NavBar from "./NavBar";
-import Home from "./Home";
-import About from "./About";
 import ProjectList from "./ProjectList";
-import user from "../data/user";
 
 function App() {
+  const projects = [
+    {
+      id: 1,
+      name: "Portfolio Website",
+      about: "A personal portfolio to showcase my projects and skills.",
+      technologies: ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      id: 2,
+      name: "E-commerce Store",
+      about: "An online store with product listings and a cart system.",
+      technologies: ["React", "Node.js", "MongoDB"]
+    },
+    {
+      id: 3,
+      name: "Weather App",
+      about: "A simple weather forecasting app using an API.",
+      technologies: ["React", "API", "Bootstrap"]
+    }
+  ];
+
   return (
-    <div>
-      <NavBar />
-      <Home username={user.name} city={user.city} color={user.color} />
-      <About bio={user.bio} links={user.links} />
-      <ProjectList projects={user.projects} />
+    <div className="App">
+      <h1>My Projects</h1>
+      <ProjectList projects={projects} />
     </div>
   );
 }
